@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EUSU Logistics</title>
+<meta name="description" content="EUSU Logistics - Ocean·Air 국제물류 포워딩 파트너">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#f4f6f7;--surface:#fff;--ink:#0d2233;--muted:#52646f;--sea:#0b4f7a;--box:#d9480f;--dock:#0d2233;
+  --line:rgba(13,34,51,.12);--shadow:0 6px 24px rgba(13,34,51,.08);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1620;--surface:#122332;--ink:#e8eff3;--muted:#9fb2bd;--sea:#5db2e6;--box:#ff7a3d;--dock:#06101a;
+  --line:rgba(232,239,243,.14);--shadow:0 6px 24px rgba(0,0,0,.35);}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.7 'Noto Sans KR',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:Archivo,'Noto Sans KR',sans-serif;line-height:1.2;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'IBM Plex Mono',monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left))}
+section{padding:72px 0}
+.eyebrow{font:500 12px 'IBM Plex Mono',monospace;color:var(--box);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(26px,4vw,38px);font-weight:800;margin-bottom:14px}
+.lead{color:var(--muted);max-width:640px;margin-bottom:36px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
+
+/* proto bar + header */
+.proto{background:var(--box);color:#fff;text-align:center;font:500 12px/1 'IBM Plex Mono',monospace;padding:8px;letter-spacing:.08em}
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);height:60px;transition:height .25s,box-shadow .25s}
+header.sm{height:52px;box-shadow:var(--shadow)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:100%;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font:800 19px Archivo,sans-serif}
+.logo i{width:18px;height:18px;background:var(--box);border-radius:3px;display:block}
+nav{display:flex;gap:22px;font-size:14px;font-weight:500}
+nav a{position:relative;padding:6px 0;color:var(--muted)}
+nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--box);transform:scaleX(0);transition:transform .25s}
+nav a.on,nav a:hover{color:var(--ink)}nav a.on::after{transform:scaleX(1)}
+.hr{display:flex;gap:10px;align-items:center}
+.lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);font:500 12px 'IBM Plex Mono',monospace;padding:0 11px;height:36px;cursor:pointer}
+.lang button.on{background:var(--sea);color:#fff}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;background:var(--box);width:0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 24px;border-radius:10px;border:1.5px solid transparent;font:700 15px 'Noto Sans KR',sans-serif;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(217,72,15,.25)}
+.btn.p{background:var(--box);color:#fff}
+.btn.s{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn.p::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:shine 4.5s infinite}
+@keyframes shine{0%,70%{left:-60%}100%{left:130%}}
+.hbtn{min-height:38px;padding:0 16px;font-size:13px}
+:focus-visible{outline:3px solid var(--sea);outline-offset:2px}
+
+/* hero */
+#top{position:relative;padding:80px 0 72px;overflow:hidden}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;z-index:1}
+.bgsvg{position:absolute;inset:0;width:100%;height:100%;opacity:.5;z-index:0}
+.route{fill:none;stroke:var(--sea);stroke-width:1.5;stroke-dasharray:4 7;animation:flow 2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-22}}
+h1{font-size:clamp(34px,6vw,60px);font-weight:800;margin-bottom:18px;animation:up .8s both}
+h1 em{font-style:normal;background:linear-gradient(var(--box),var(--box)) 0 100%/0 .12em no-repeat;animation:ul 1s .9s forwards}
+@keyframes ul{to{background-size:100% .12em}}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hero p.sub{color:var(--muted);font-size:18px;max-width:520px;margin-bottom:28px;animation:up .8s .15s both}
+.cta{display:flex;gap:12px;flex-wrap:wrap;animation:up .8s .3s both}
+.track{transform-style:preserve-3d;transition:transform .15s;animation:up .8s .2s both}
+.track .tag{font:500 11px 'IBM Plex Mono',monospace;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:16px}
+.steps{list-style:none;padding:0;position:relative}
+.steps::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;border-left:2px dashed var(--sea);opacity:.5}
+.steps li{display:flex;gap:14px;align-items:center;padding:9px 0;position:relative;opacity:0;animation:up .6s forwards}
+.steps li:nth-child(1){animation-delay:.6s}.steps li:nth-child(2){animation-delay:.9s}.steps li:nth-child(3){animation-delay:1.2s}.steps li:nth-child(4){animation-delay:1.5s}
+.steps b{width:16px;height:16px;border-radius:50%;background:var(--surface);border:3px solid var(--sea);flex:none}
+.steps li.cur b{border-color:var(--box);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,72,15,.5)}100%{box-shadow:0 0 0 12px rgba(217,72,15,0)}}
+.steps span{font-size:14px}.steps small{display:block;color:var(--muted);font:400 11px 'IBM Plex Mono',monospace}
+
+/* ports */
+.ports{border-block:1px solid var(--line);background:var(--surface);overflow:hidden;padding:14px 0}
+.ports div{display:flex;gap:44px;width:max-content;animation:marq 45s linear infinite;font:500 14px 'IBM Plex Mono',monospace;color:var(--muted)}
+.ports:hover div{animation-play-state:paused}
+.ports span::before{content:"● ";color:var(--box)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s;transition-delay:calc(var(--i,0)*.08s)}
+.js .rv.in{opacity:1;transform:none}
+
+/* about */
+.vm{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:36px}
+.since{font:800 clamp(56px,10vw,96px) Archivo,sans-serif;color:var(--sea);line-height:1}
+.tl{position:relative;padding-left:28px;display:grid;gap:18px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--box);transform-origin:top;transform:scaleY(0);transition:transform 1.5s}
+.tl.in::before{transform:scaleY(1)}
+.tl div{position:relative}
+.tl div::before{content:"";position:absolute;left:-28px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:3px solid var(--box)}
+.tl b{font:500 13px 'IBM Plex Mono',monospace;color:var(--box)}
+.stats{display:flex;gap:30px;flex-wrap:wrap;margin-top:18px}
+.stats strong{font:800 34px Archivo,sans-serif;color:var(--sea);display:block}
+.stats span{font-size:13px;color:var(--muted)}
+
+/* services */
+.svc h3{font-size:24px;margin-bottom:6px}
+.svc ul,.why ul{list-style:none;padding:0;margin-top:14px;display:grid;gap:8px}
+.svc li{padding-left:18px;position:relative;color:var(--muted);font-size:15px;opacity:1}
+.js .svc.in li{animation:lft .6s both;animation-delay:calc(var(--n)*.1s + .2s)}
+@keyframes lft{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.svc li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:2px;background:var(--box)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips span{padding:8px 16px;border:1px solid var(--line);border-radius:99px;background:var(--surface);font-size:14px}
+
+/* why */
+.ico{width:48px;height:48px;margin-bottom:14px}
+.ico *{fill:none;stroke:var(--box);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:140;stroke-dashoffset:140;transition:stroke-dashoffset 1.4s}
+.in .ico *{stroke-dashoffset:0}
+.why h3{font-size:20px;margin-bottom:8px}.why p{color:var(--muted);font-size:15px}
+
+/* network */
+.net{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.net svg{width:100%;height:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.hub{fill:var(--box)}.ring{fill:none;stroke:var(--box);transform-box:fill-box;transform-origin:center;animation:ping 2.4s ease-out infinite}
+@keyframes ping{from{transform:scale(.4);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.reg{list-style:none;padding:0;display:grid;gap:10px}
+.reg li{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.reg b{font-size:15px}.reg span{font:400 12px 'IBM Plex Mono',monospace;color:var(--muted);text-align:right}
+.note{font-size:12px;color:var(--muted);margin-top:12px}
+
+/* system */
+.chan{text-align:center}.chan b{display:block;font:700 18px Archivo,sans-serif;margin-bottom:4px;color:var(--sea)}
+.chan span{font-size:14px;color:var(--muted)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.tbl{width:100%;border-collapse:collapse;margin-top:28px;font-size:14px;background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line)}
+.tbl th{font:500 12px 'IBM Plex Mono',monospace;color:var(--muted);text-transform:uppercase}
+.tbl td:first-child{font-family:'IBM Plex Mono',monospace}
+.tbl tr:not(:first-child){animation:hl 6s infinite}
+.tbl tr:nth-child(2){animation-delay:0s}.tbl tr:nth-child(3){animation-delay:2s}.tbl tr:nth-child(4){animation-delay:4s}
+@keyframes hl{0%,33%{background:color-mix(in srgb,var(--sea) 14%,transparent)}34%,100%{background:transparent}}
+.pill{padding:3px 10px;border-radius:99px;font:500 12px 'IBM Plex Mono',monospace;background:color-mix(in srgb,var(--sea) 15%,transparent);color:var(--sea)}
+.pill.act{background:color-mix(in srgb,var(--box) 18%,transparent);color:var(--box);animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.45}}
+.tw{overflow-x:auto}
+
+/* industries */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tabs button{min-height:40px;padding:0 18px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:500 14px 'Noto Sans KR',sans-serif;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--sea);color:#fff;border-color:var(--sea)}
+.panel{display:none}.panel.on{display:block;animation:fade .45s}
+.panel li{list-style:none;padding:10px 0 10px 20px;border-bottom:1px solid var(--line);position:relative;animation:lft .5s both;animation-delay:calc(var(--n)*.08s)}
+.panel li::before{content:"";position:absolute;left:0;top:20px;width:8px;height:8px;background:var(--box);border-radius:2px}
+.panel ul{padding:0}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+/* contact */
+#contact{background:var(--dock);color:#e8eff3;position:relative;overflow:hidden}
+#contact::before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:-160px;border-radius:50%;background:radial-gradient(circle,rgba(255,122,61,.35),transparent 65%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-260px,180px)}}
+#contact .wrap{position:relative}
+#contact .lead{color:#9fb2bd}
+.cgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:36px}
+.addr{font-size:15px;color:#c3d1d9}.addr b{display:block;color:#fff;margin-bottom:6px}
+form{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.f{display:grid;gap:6px}.f.full{grid-column:1/-1}
+label{font-size:13px;color:#c3d1d9}
+input,select,textarea{width:100%;min-height:46px;padding:10px 14px;border-radius:10px;border:1.5px solid rgba(232,239,243,.25);background:rgba(255,255,255,.06);color:#fff;font:400 15px 'Noto Sans KR',sans-serif}
+select option{color:#0d2233}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:0;border-color:#ff7a3d;box-shadow:0 0 0 3px rgba(255,122,61,.3)}
+.err{font-size:12px;color:#ff9b73;min-height:0;display:none}
+.f.bad .err{display:block}.f.bad input,.f.bad select,.f.bad textarea{border-color:#ff7a3d;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13px}
+.agree input{width:20px;min-height:20px;margin-top:3px}
+.hp{position:absolute;left:-9999px;opacity:0}
+.done{display:none;text-align:center;padding:40px 10px;grid-column:1/-1}
+.done svg{width:64px;height:64px}.done path{fill:none;stroke:#ff7a3d;stroke-width:4;stroke-dasharray:60;stroke-dashoffset:60}
+.done.show{display:block}.done.show path{animation:draw .8s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+footer{background:var(--dock);color:#9fb2bd;padding:32px 0;font-size:13px;border-top:1px solid rgba(255,255,255,.08)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (max-width:900px){
+  nav{display:none}.hero,.net,.cgrid,.vm{grid-template-columns:1fr}.g3,.g4{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  section{padding:52px 0}.g2,.g3,.g4{grid-template-columns:1fr}.hbtn.contact{display:none}form{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}.steps li{opacity:1}.tl::before{transform:none}.ico *{stroke-dashoffset:0}h1 em{background-size:100% .12em}
+}
+</style>
+</head>
+<body>
+<div class="proto" id="proto">PROTOTYPE · <span data-k="proto"></span></div>
+
+<header id="hd">
+  <div class="wrap">
+    <a href="#top" class="logo"><i></i>EUSU Logistics</a>
+    <nav aria-label="Main">
+      <a href="#about" data-k="n_about"></a><a href="#services" data-k="n_services"></a><a href="#why" data-k="n_why"></a><a href="#network" data-k="n_network"></a><a href="#industries" data-k="n_ind"></a>
+    </nav>
+    <div class="hr">
+      <div class="lang" role="group" aria-label="Language"><button data-l="ko">KO</button><button data-l="en">EN</button></div>
+      <a href="#contact" class="btn p hbtn contact" data-k="n_contact"></a>
+    </div>
+  </div>
+  <div class="prog" id="prog"></div>
+</header>
+
+<main>
+<section id="top">
+  <svg class="bgsvg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path id="r1" class="route" d="M60 420 C 300 120, 700 80, 1140 300"/>
+    <path class="route" d="M80 520 C 400 300, 800 460, 1120 180" style="animation-duration:3s"/>
+    <circle r="5" fill="#d9480f"><animateMotion dur="9s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></circle>
+    <circle r="4" fill="#d9480f" opacity=".7"><animateMotion dur="9s" begin="-4s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></circle>
+  </svg>
+  <div class="wrap hero">
+    <div>
+      <p class="eyebrow">Global Freight Forwarding</p>
+      <h1><span data-k="h1a"></span><br><em data-k="h1b"></em></h1>
+      <p class="sub" data-k="hsub"></p>
+      <div class="cta"><a href="#contact" class="btn p" data-k="cta1"></a><a href="#services" class="btn s" data-k="cta2"></a></div>
+    </div>
+    <div class="card track" id="tilt">
+      <div class="tag"><span>TRACKING · SAMPLE</span><span data-k="sample"></span></div>
+      <ul class="steps">
+        <li><b></b><span><span data-k="s1"></span><small>BUSAN, KR</small></span></li>
+        <li><b></b><span><span data-k="s2"></span><small>PUS → LAX</small></span></li>
+        <li class="cur"><b></b><span><span data-k="s3"></span><small>PACIFIC OCEAN</small></span></li>
+        <li><b></b><span><span data-k="s4"></span><small>LOS ANGELES, US</small></span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="ports" aria-hidden="true"><div id="portrow"></div></div>
+
+<section id="about"><div class="wrap">
+  <p class="eyebrow rv">About</p><h2 class="rv" data-k="ab_t"></h2>
+  <div class="vm">
+    <div class="card rv"><p class="eyebrow">Vision</p><p data-k="vision"></p></div>
+    <div class="card rv" style="--i:1"><p class="eyebrow">Mission</p><p data-k="mission"></p></div>
+  </div>
+  <div class="grid g2" style="align-items:center">
+    <div class="rv"><div class="mono" style="color:var(--muted);font-size:13px" data-k="since"></div>
+      <div class="since" id="cnt" data-to="2001">2001</div>
+      <div class="stats"><div><strong>00</strong><span data-k="st1"></span></div><div><strong>00</strong><span data-k="st2"></span></div></div></div>
+    <div class="tl rv" id="tl" style="--i:1">
+      <div><b>1980</b><p data-k="h1980"></p></div>
+      <div><b>2001</b><p data-k="h2001"></p></div>
+      <div><b>20XX</b><p data-k="h3"></p></div>
+      <div><b>20XX</b><p data-k="h4"></p></div>
+      <div><b>20XX</b><p data-k="h5"></p></div>
+      <div><b>2019</b><p data-k="h6"></p></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="services" style="background:color-mix(in srgb,var(--sea) 5%,var(--bg))"><div class="wrap">
+  <p class="eyebrow rv">Services</p><h2 class="rv" data-k="sv_t"></h2><p class="lead rv" data-k="sv_l"></p>
+  <div class="grid g2">
+    <div class="card svc rv"><h3>Ocean</h3><p style="color:var(--muted)" data-k="oc_d"></p>
+      <ul><li style="--n:1">FCL / LCL</li><li style="--n:2">Consolidation</li><li style="--n:3">B/L · D/O</li><li style="--n:4" data-k="oc4"></li></ul></div>
+    <div class="card svc rv" style="--i:1"><h3>Air</h3><p style="color:var(--muted)" data-k="ar_d"></p>
+      <ul><li style="--n:1">Express / Consol</li><li style="--n:2">Charter</li><li style="--n:3">AWB</li><li style="--n:4" data-k="ar4"></li></ul></div>
+  </div>
+  <div class="chips rv"><span>Customs Brokerage</span><span>Warehousing</span><span>Trucking</span><span>Project Cargo</span><span>Cargo Insurance</span></div>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <p class="eyebrow rv">Why EUSU</p><h2 class="rv" data-k="wy_t"></h2>
+  <div class="grid g3">
+    <div class="card why rv"><svg class="ico" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M6 24h36M24 6c-8 9-8 27 0 36M24 6c8 9 8 27 0 36"/></svg><h3 data-k="w1t"></h3><p data-k="w1d"></p></div>
+    <div class="card why rv" style="--i:1"><svg class="ico" viewBox="0 0 48 48"><rect x="6" y="10" width="36" height="28" rx="3"/><path d="M6 20h36M14 30h8"/></svg><h3 data-k="w2t"></h3><p data-k="w2d"></p></div>
+    <div class="card why rv" style="--i:2"><svg class="ico" viewBox="0 0 48 48"><path d="M24 5l16 6v12c0 10-7 17-16 20C15 40 8 33 8 23V11z"/><path d="M17 24l5 5 9-10"/></svg><h3 data-k="w3t"></h3><p data-k="w3d"></p></div>
+  </div>
+</div></section>
+
+<section id="network" style="background:color-mix(in srgb,var(--sea) 5%,var(--bg))"><div class="wrap">
+  <p class="eyebrow rv">Global Network</p><h2 class="rv" data-k="nw_t"></h2><p class="lead rv" data-k="nw_l"></p>
+  <div class="net">
+    <svg viewBox="0 0 600 340" class="rv" role="img" aria-label="Network diagram">
+      <path id="np1" class="route" d="M470 120 C 380 40, 220 40, 120 130"/>
+      <path id="np2" class="route" d="M470 120 C 420 220, 300 260, 140 230"/>
+      <path class="route" d="M470 120 C 500 200, 480 260, 430 290"/>
+      <circle r="4" fill="#d9480f"><animateMotion dur="6s" repeatCount="indefinite"><mpath href="#np1"/></animateMotion></circle>
+      <circle r="4" fill="#d9480f"><animateMotion dur="7s" repeatCount="indefinite"><mpath href="#np2"/></animateMotion></circle>
+      <g><circle class="hub" cx="470" cy="120" r="7"/><circle class="ring" cx="470" cy="120" r="7"/>
+         <circle class="hub" cx="120" cy="130" r="6"/><circle class="ring" cx="120" cy="130" r="6" style="animation-delay:.6s"/>
+         <circle class="hub" cx="140" cy="230" r="6"/><circle class="ring" cx="140" cy="230" r="6" style="animation-delay:1.2s"/>
+         <circle class="hub" cx="430" cy="290" r="6"/><circle class="ring" cx="430" cy="290" r="6" style="animation-delay:1.8s"/></g>
+      <text x="470" y="100" text-anchor="middle" font-size="12" fill="currentColor" font-family="IBM Plex Mono">SEOUL / BUSAN</text>
+    </svg>
+    <ul class="reg rv" style="--i:1" id="reglist"></ul>
+  </div>
+  <p class="note" data-k="nw_note"></p>
+</div></section>
+
+<section id="system"><div class="wrap">
+  <p class="eyebrow rv">Our System</p><h2 class="rv" data-k="sy_t"></h2><p class="lead rv" data-k="sy_l"></p>
+  <div class="grid g4">
+    <div class="card chan rv"><b>EDI</b><span data-k="c1"></span></div>
+    <div class="card chan rv" style="--i:1"><b>Mail</b><span data-k="c2"></span></div>
+    <div class="card chan rv" style="--i:2"><b>Portal</b><span data-k="c3"></span></div>
+    <div class="card chan rv" style="--i:3"><b>App</b><span data-k="c4"></span></div>
+  </div>
+  <div class="tw rv"><table class="tbl">
+    <tr><th>B/L No.</th><th data-k="th2"></th><th data-k="th3"></th><th data-k="th4"></th></tr>
+    <tr><td>SAMPLE0001</td><td>PUS → LAX</td><td>ETA 00-00</td><td><span class="pill" data-k="p1"></span></td></tr>
+    <tr><td>SAMPLE0002</td><td>ICN → FRA</td><td>ETA 00-00</td><td><span class="pill act" data-k="p2"></span></td></tr>
+    <tr><td>SAMPLE0003</td><td>SHA → RTM</td><td>ETA 00-00</td><td><span class="pill" data-k="p3"></span></td></tr>
+  </table></div>
+</div></section>
+
+<section id="industries" style="background:color-mix(in srgb,var(--sea) 5%,var(--bg))"><div class="wrap">
+  <p class="eyebrow rv">Industries</p><h2 class="rv" data-k="in_t"></h2>
+  <div class="tabs rv" role="tablist" id="tabs"></div>
+  <div class="card rv" id="panels"></div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <p class="eyebrow">Contact Us</p><h2 data-k="ct_t"></h2><p class="lead" data-k="ct_l"></p>
+  <div class="cgrid">
+    <div class="addr"><b data-k="addr_h"></b><span data-k="addr"></span><br><br><span data-k="reply"></span></div>
+    <form id="cf" novalidate>
+      <div class="f"><label for="co" data-k="f_co"></label><input id="co" name="company" required autocomplete="organization"><span class="err" data-k="e_req"></span></div>
+      <div class="f"><label for="nm" data-k="f_nm"></label><input id="nm" name="name" required autocomplete="name"><span class="err" data-k="e_req"></span></div>
+      <div class="f"><label for="em" data-k="f_em"></label><input id="em" name="email" type="email" required autocomplete="email"><span class="err" data-k="e_em"></span></div>
+      <div class="f"><label for="ph" data-k="f_ph"></label><input id="ph" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="f full"><label for="ty" data-k="f_ty"></label>
+        <select id="ty" name="type" required><option value="" data-k="sel"></option><option value="Ocean">Ocean</option><option value="Air">Air</option><option value="Warehousing/Trucking">Warehousing / Trucking</option><option value="Partnership" data-k="o_pt"></option><option value="Other" data-k="o_ot"></option></select><span class="err" data-k="e_sel"></span></div>
+      <div class="f full"><label for="ms" data-k="f_ms"></label><textarea id="ms" name="message" required></textarea><span class="err" data-k="e_req"></span></div>
+      <div class="f full"><label class="agree"><input type="checkbox" id="ag" name="agree"><span data-k="f_ag"></span></label><span class="err" data-k="e_ag"></span></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="f full"><button class="btn p" type="submit" data-k="f_go"></button></div>
+      <div class="done" id="done" role="status"><svg viewBox="0 0 64 64"><path d="M14 33l13 13 24-28"/></svg><p id="donemsg" style="margin-top:10px"></p></div>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>© EUSU Logistics</span><span data-k="addr"></span></div></footer>
+
+<script>
+(function(){
+/* ===== KO/EN 문구 테이블 (여기서만 수정) ===== */
+var T={
+ko:{proto:"시안입니다 · 수치와 화면은 예시입니다",n_about:"회사소개",n_services:"서비스",n_why:"강점",n_network:"네트워크",n_ind:"산업별",n_contact:"문의하기",
+h1a:"화물의 시작부터 도착까지,",h1b:"끊김 없는 물류",hsub:"Ocean·Air 국제운송, 통관, 창고·운송까지 EUSU가 하나의 창구로 연결합니다.",cta1:"견적 문의",cta2:"서비스 보기",
+sample:"예시 데이터",s1:"출발지 접수",s2:"선적 완료",s3:"해상 운송 중",s4:"도착 · 인도",
+ab_t:"신뢰로 이어온 국제물류",vision:"고객의 글로벌 공급망을 가장 믿을 수 있게 연결하는 물류 파트너.",mission:"정확한 정보와 빠른 대응으로 고객의 비즈니스 경쟁력을 높입니다.",since:"SINCE",st1:"해외 거점 수",st2:"진출 국가 수",
+h1980:"회사 설립",h2001:"국제물류 포워딩 사업 확대",h3:"연혁 항목 (확인 필요)",h4:"연혁 항목 (확인 필요)",h5:"연혁 항목 (확인 필요)",h6:"Company Profile 발간",
+sv_t:"화물에 맞는 운송 솔루션",sv_l:"해상·항공 운송을 중심으로 통관과 내륙 운송까지 한 번에 처리합니다.",oc_d:"FCL·LCL 해상 운송과 혼재(Consolidation) 서비스.",ar_d:"긴급 화물부터 정기 화물까지 항공 운송.",oc4:"선적·도착 단계별 진행 안내",ar4:"긴급 화물 대응",
+wy_t:"EUSU가 다른 이유",w1t:"글로벌 네트워크",w1d:"주요 거점의 파트너와 직접 연결되어 현지 이슈에 빠르게 대응합니다.",w2t:"통합 시스템",w2d:"EDI·메일·Portal·App으로 화물 상태를 투명하게 공유합니다.",w3t:"안정적인 품질",w3d:"업종별 취급 경험을 바탕으로 안전하고 정확한 운송을 약속합니다.",
+nw_t:"세계로 이어지는 거점",nw_l:"권역별 거점을 통해 출발지부터 도착지까지 연속된 서비스를 제공합니다.",nw_note:"※ 거점 목록은 2019년 자료 기준이며 현행 확인 후 교체 예정입니다.",
+sy_t:"한눈에 보이는 화물 현황",sy_l:"고객 환경에 맞는 4가지 채널로 화물 정보를 받아보세요.",c1:"시스템 간 자동 연동",c2:"정기 상태 리포트",c3:"웹에서 실시간 조회",c4:"모바일 알림·조회",th2:"구간",th3:"도착 예정",th4:"상태",p1:"선적 완료",p2:"운송 중",p3:"통관 중",
+in_t:"업종을 아는 물류",ct_t:"문의하기",ct_l:"화물 정보를 남겨주시면 담당자가 확인 후 연락드립니다.",addr_h:"본사",addr:"서울특별시 (본사 주소 확인 필요)",reply:"영업일 기준 [ ]일 이내 회신드립니다.",
+f_co:"회사명 *",f_nm:"담당자명 *",f_em:"이메일 *",f_ph:"연락처",f_ty:"문의 유형 *",f_ms:"문의 내용 *",f_ag:"개인정보 수집·이용에 동의합니다. *",f_go:"문의 보내기",sel:"선택해 주세요",o_pt:"파트너십",o_ot:"기타",
+e_req:"필수 입력 항목입니다.",e_em:"올바른 이메일 형식을 입력해 주세요.",e_sel:"문의 유형을 선택해 주세요.",e_ag:"개인정보 수집·이용에 동의해 주세요.",
+ok:"접수 화면입니다. (시안: 실제 메일은 발송되지 않습니다.)"},
+en:{proto:"Prototype · figures and screens are samples",n_about:"About",n_services:"Services",n_why:"Why EUSU",n_network:"Network",n_ind:"Industries",n_contact:"Contact",
+h1a:"From pickup to delivery,",h1b:"logistics without gaps",hsub:"Ocean, Air, customs and warehousing — connected through one EUSU window.",cta1:"Request a Quote",cta2:"View Services",
+sample:"Sample data",s1:"Origin pickup",s2:"Loaded on vessel",s3:"In transit by sea",s4:"Arrived · Delivered",
+ab_t:"Decades of trusted freight forwarding",vision:"The logistics partner that connects our customers' global supply chains with the highest reliability.",mission:"We strengthen our customers' competitiveness with accurate information and fast response.",since:"SINCE",st1:"Overseas offices",st2:"Countries",
+h1980:"Company founded",h2001:"Expanded international forwarding business",h3:"Milestone (to be confirmed)",h4:"Milestone (to be confirmed)",h5:"Milestone (to be confirmed)",h6:"Company Profile published",
+sv_t:"Transport solutions that fit your cargo",sv_l:"Ocean and air freight, plus customs and inland delivery, handled end to end.",oc_d:"FCL / LCL ocean freight and Consolidation service.",ar_d:"Air freight for urgent and scheduled cargo.",oc4:"Step-by-step shipment updates",ar4:"Urgent cargo handling",
+wy_t:"Why EUSU",w1t:"Global Network",w1d:"Direct links with partners at key hubs let us react quickly to local issues.",w2t:"Integrated Systems",w2d:"EDI, mail, Portal and App keep cargo status transparent.",w3t:"Reliable Quality",w3d:"Industry-specific handling experience for safe and accurate delivery.",
+nw_t:"Hubs connected worldwide",nw_l:"Regional hubs deliver a continuous service from origin to destination.",nw_note:"* Hub list is based on 2019 data and will be updated after confirmation.",
+sy_t:"Cargo status at a glance",sy_l:"Receive shipment information through four channels that suit your workflow.",c1:"Automated system link",c2:"Regular status reports",c3:"Real-time web lookup",c4:"Mobile alerts and lookup",th2:"Route",th3:"ETA",th4:"Status",p1:"Loaded",p2:"In transit",p3:"Customs",
+in_t:"Logistics that knows your industry",ct_t:"Contact Us",ct_l:"Leave your cargo details and our team will get back to you.",addr_h:"Head Office",addr:"Seoul, Korea (address to be confirmed)",reply:"We reply within [ ] business days.",
+f_co:"Company *",f_nm:"Name *",f_em:"Email *",f_ph:"Phone",f_ty:"Inquiry type *",f_ms:"Message *",f_ag:"I agree to the collection and use of personal information. *",f_go:"Send Inquiry",sel:"Please select",o_pt:"Partnership",o_ot:"Other",
+e_req:"This field is required.",e_em:"Please enter a valid email address.",e_sel:"Please select an inquiry type.",e_ag:"Please agree to continue.",
+ok:"Submission screen only. (Prototype: no email is actually sent.)"}
+};
+var REG={ko:[["한국","서울 · 부산 · 인천"],["중국","상하이 · 닝보 · 칭다오"],["동남아","싱가포르 · 호치민 · 방콕"],["일본","도쿄 · 오사카"],["북미","로스앤젤레스 · 뉴욕"],["유럽","로테르담 · 함부르크"]],
+ en:[["Korea","Seoul · Busan · Incheon"],["China","Shanghai · Ningbo · Qingdao"],["SE Asia","Singapore · HCMC · Bangkok"],["Japan","Tokyo · Osaka"],["N. America","Los Angeles · New York"],["Europe","Rotterdam · Hamburg"]]};
+var IND={
+ko:[["의류",["Consolidation으로 소량 화물 통합 운송","시즌 일정에 맞춘 납기 관리","비용 절감 효과 (근거 수치 확인 필요)"]],["하이테크",["정밀 장비 취급과 온도·충격 관리","긴급 항공 운송 대응","보안 통관 절차 지원"]],["FMCG",["대량·정기 물량 안정 운송","창고 보관 및 배송 연계","유통기한 고려한 일정 관리"]],["자동차 부품",["JIT 일정에 맞춘 납기 운영","Trucking 연계 라인 공급","통관·인증 서류 지원"]],["화학",["위험물(DG) 규정 준수 운송","전문 포장·컨테이너 수배","안전 서류 사전 검토"]],["식음료",["Reefer 컨테이너 온도 관리","신선도 유지 일정 운영","검역·위생 서류 지원"]],["Project Cargo",["대형·중량물 운송 설계","특수 장비 및 선복 수배","현장 인도까지 일관 관리"]]],
+en:[["Apparel",["Consolidation of small shipments","Delivery managed to seasonal deadlines","Cost savings (figure to be confirmed)"]],["High-Tech",["Precision equipment handling with shock and temperature control","Urgent air freight response","Secure customs support"]],["FMCG",["Stable high-volume, regular shipments","Warehousing and delivery link","Schedules built around shelf life"]],["Auto Parts",["JIT-aligned delivery","Trucking-linked line supply","Customs and certification documents"]],["Chemicals",["DG-compliant transport","Specialized packing and containers","Pre-review of safety documents"]],["Food & Beverage",["Reefer container temperature control","Freshness-first scheduling","Quarantine and hygiene documents"]],["Project Cargo",["Heavy-lift transport planning","Special equipment and space booking","End-to-end management to site"]]]};
+var PORTS="PUS ICN LAX LGB NYC SHA NGB SIN HKG RTM HAM TYO".split(" ");
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+var lang='ko',tab=0;
+try{var sv=localStorage.getItem('eusu-lang');if(sv==='ko'||sv==='en')lang=sv}catch(e){}
+
+$('#portrow').innerHTML=PORTS.concat(PORTS).map(function(p){return'<span>'+p+'</span>'}).join('');
+
+function render(){
+  var t=T[lang];document.documentElement.lang=lang;
+  $$('[data-k]').forEach(function(el){var v=t[el.dataset.k];if(v!==undefined)el.textContent=v});
+  $$('.lang button').forEach(function(b){b.classList.toggle('on',b.dataset.l===lang)});
+  $('#reglist').innerHTML=REG[lang].map(function(r){return'<li><b>'+r[0]+'</b><span>'+r[1]+'</span></li>'}).join('');
+  $('#tabs').innerHTML=IND[lang].map(function(x,i){return'<button role="tab" id="t'+i+'" aria-selected="'+(i===tab)+'" aria-controls="p'+i+'" tabindex="'+(i===tab?0:-1)+'">'+x[0]+'</button>'}).join('');
+  $('#panels').innerHTML=IND[lang].map(function(x,i){return'<div class="panel'+(i===tab?' on':'')+'" role="tabpanel" id="p'+i+'" aria-labelledby="t'+i+'"><h3 style="margin-bottom:8px">'+x[0]+'</h3><ul>'+x[1].map(function(l,n){return'<li style="--n:'+n+'">'+l+'</li>'}).join('')+'</ul></div>'}).join('');
+  document.title=lang==='ko'?'EUSU Logistics | 국제물류 포워딩':'EUSU Logistics | Global Freight Forwarding';
+}
+document.addEventListener('click',function(e){
+  var b=e.target.closest('.lang button');
+  if(b){lang=b.dataset.l;try{localStorage.setItem('eusu-lang',lang)}catch(x){}render();return}
+  var tb=e.target.closest('[role=tab]');if(tb){tab=+tb.id.slice(1);render();$('#t'+tab).focus()}
+});
+document.addEventListener('keydown',function(e){
+  if(!e.target.matches||!e.target.matches('[role=tab]'))return;
+  var n=IND.ko.length,k=e.key;
+  if(k==='ArrowRight')tab=(tab+1)%n;else if(k==='ArrowLeft')tab=(tab+n-1)%n;else return;
+  e.preventDefault();render();$('#t'+tab).focus();
+});
+render();
+
+/* header + progress + active menu */
+var hd=$('#hd'),pg=$('#prog'),links=$$('nav a'),secs=links.map(function(a){return $(a.getAttribute('href'))});
+function onScroll(){
+  var y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;
+  hd.classList.toggle('sm',y>20);pg.style.width=(h>0?y/h*100:0)+'%';
+  var cur=-1;secs.forEach(function(s,i){if(s.getBoundingClientRect().top<120)cur=i});
+  links.forEach(function(a,i){a.classList.toggle('on',i===cur)});
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+/* reveal + count-up + timeline */
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function count(el){
+  if(reduce)return;var to=+el.dataset.to,from=1980,t0=null;
+  (function f(ts){t0=t0||ts;var p=Math.min((ts-t0)/1400,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(f)})(performance.now());
+}
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(en){
+    if(!en.isIntersecting)return;en.target.classList.add('in');
+    if(en.target.querySelector&&en.target.querySelector('#cnt'))count($('#cnt'));
+    io.unobserve(en.target)})},{threshold:.15});
+  $$('.rv').forEach(function(el){io.observe(el)});
+}else{$$('.rv').forEach(function(el){el.classList.add('in')})}
+
+/* hero card tilt */
+var tilt=$('#tilt');
+if(!reduce&&matchMedia('(hover:hover)').matches){
+  tilt.addEventListener('pointermove',function(e){var r=tilt.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    tilt.style.transform='perspective(800px) rotateY('+(x*16)+'deg) rotateX('+(-y*16)+'deg)'});
+  tilt.addEventListener('pointerleave',function(){tilt.style.transform=''});
+}
+
+/* contact form */
+var ENDPOINT='';/* 서버 엔드포인트 연동 시 URL 입력 (예: '/api/contact') */
+var form=$('#cf');
+function validate(){
+  var ok=true,first=null;
+  function mark(el,bad){var f=el.closest('.f');f.classList.toggle('bad',bad);if(bad){ok=false;if(!first)first=el}}
+  ['co','nm','ms'].forEach(function(id){var el=$('#'+id);mark(el,!el.value.trim())});
+  var em=$('#em');mark(em,!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value.trim()));
+  mark($('#ty'),!$('#ty').value);mark($('#ag'),!$('#ag').checked);
+  if(first)first.focus();return ok;
+}
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(form.website.value)return;/* 스팸 방지 숨김 필드: 조용히 무시 */
+  if(!validate())return;
+  var done=function(){$$('.f',form).forEach(function(f){f.style.display='none'});$('#donemsg').textContent=T[lang].ok;$('#done').classList.add('show')};
+  if(!ENDPOINT){done();return}
+  var data=new FormData(form);
+  fetch(ENDPOINT,{method:'POST',body:data}).then(function(r){if(!r.ok)throw 0;done()}).catch(function(){alert(lang==='ko'?'전송에 실패했습니다. 대표 메일로 문의해 주세요.':'Failed to send. Please contact us by email.')});
+});
+$$('input,select,textarea',form).forEach(function(el){el.addEventListener('input',function(){el.closest('.f').classList.remove('bad')})});
+})();
+</script>
+</body>
+</html>
